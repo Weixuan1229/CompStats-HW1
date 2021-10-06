@@ -1,0 +1,24 @@
+% Problem 1:
+% Find the complex-valued root of 
+%       f(x) = x^2 - 2x +2
+% which is closet to x = i.
+
+disp('Problem 1:')
+
+% equivalent two-dimensional system for this problem
+S = @(x)[x(1)^2-x(2)^2-2*x(1)+2;2*(x(1)-1)*x(2)];
+
+% equivalent derivatives of this two-dimensional system for this problem
+dS = @(x)[2*x(1)-2, -2*x(2);2*x(2), 2*(x(1)-1)];
+
+% inital value
+x0 = [0;1];  % x = 0 + 1i
+
+% get the root of the system
+x = solve_newton(x0, S, dS, 1e-12, 100);
+
+% complex-valued root of this polynomial
+z = x(1) + x(2)*1i;
+
+disp(['complex-valued of f(x) close to x=i is ', num2str(z)])
+
